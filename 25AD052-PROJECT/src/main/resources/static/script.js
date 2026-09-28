@@ -17,6 +17,11 @@ async function addInstallation() {
     const totalCapacity =
         document.getElementById("installationCapacity").value;
 
+    if (!name || !location || !totalCapacity) {
+        alert("Please fill all installation fields.");
+        return;
+    }
+
     const installation = {
         name: name,
         location: location,
@@ -37,7 +42,7 @@ async function addInstallation() {
         );
 
         if (!response.ok) {
-            throw new Error("Failed to add installation");
+            throw new Error(await response.text());
         }
 
         alert("Installation added successfully!");
@@ -47,11 +52,12 @@ async function addInstallation() {
         document.getElementById("installationCapacity").value = "";
 
         loadInstallations();
+        loadDashboard();
 
     } catch (error) {
 
         console.error(error);
-        alert("Error adding installation");
+        alert("Error adding installation: " + error.message);
     }
 }
 
@@ -68,7 +74,8 @@ async function loadInstallations() {
             throw new Error("Failed to load installations");
         }
 
-        const installations = await response.json();
+        const installations =
+            await response.json();
 
         const container =
             document.getElementById("installationList");
@@ -77,7 +84,8 @@ async function loadInstallations() {
 
         installations.forEach(installation => {
 
-            const card = document.createElement("div");
+            const card =
+                document.createElement("div");
 
             card.className = "result-card";
 
@@ -159,17 +167,18 @@ async function updateInstallation(id) {
         );
 
         if (!response.ok) {
-            throw new Error("Failed to update installation");
+            throw new Error(await response.text());
         }
 
         alert("Installation updated successfully!");
 
         loadInstallations();
+        loadDashboard();
 
     } catch (error) {
 
         console.error(error);
-        alert("Error updating installation");
+        alert("Error updating installation: " + error.message);
     }
 }
 
@@ -177,10 +186,11 @@ async function updateInstallation(id) {
 // DELETE INSTALLATION
 async function deleteInstallation(id) {
 
-    const confirmDelete =
-        confirm("Are you sure you want to delete this installation?");
-
-    if (!confirmDelete) return;
+    if (!confirm(
+        "Are you sure you want to delete this installation?"
+    )) {
+        return;
+    }
 
     try {
 
@@ -192,17 +202,18 @@ async function deleteInstallation(id) {
         );
 
         if (!response.ok) {
-            throw new Error("Failed to delete installation");
+            throw new Error(await response.text());
         }
 
         alert("Installation deleted successfully!");
 
         loadInstallations();
+        loadDashboard();
 
     } catch (error) {
 
         console.error(error);
-        alert("Error deleting installation");
+        alert("Error deleting installation: " + error.message);
     }
 }
 
@@ -222,6 +233,11 @@ async function addHousehold() {
 
     const allocationRatio =
         document.getElementById("allocationRatio").value;
+
+    if (!householdName || !houseNumber || !allocationRatio) {
+        alert("Please fill all household fields.");
+        return;
+    }
 
     const household = {
         householdName: householdName,
@@ -243,7 +259,7 @@ async function addHousehold() {
         );
 
         if (!response.ok) {
-            throw new Error("Failed to add household");
+            throw new Error(await response.text());
         }
 
         alert("Household added successfully!");
@@ -253,11 +269,12 @@ async function addHousehold() {
         document.getElementById("allocationRatio").value = "";
 
         loadHouseholds();
+        loadDashboard();
 
     } catch (error) {
 
         console.error(error);
-        alert("Error adding household");
+        alert("Error adding household: " + error.message);
     }
 }
 
@@ -274,7 +291,8 @@ async function loadHouseholds() {
             throw new Error("Failed to load households");
         }
 
-        const households = await response.json();
+        const households =
+            await response.json();
 
         const container =
             document.getElementById("householdList");
@@ -283,7 +301,8 @@ async function loadHouseholds() {
 
         households.forEach(household => {
 
-            const card = document.createElement("div");
+            const card =
+                document.createElement("div");
 
             card.className = "result-card";
 
@@ -365,17 +384,18 @@ async function updateHousehold(id) {
         );
 
         if (!response.ok) {
-            throw new Error("Failed to update household");
+            throw new Error(await response.text());
         }
 
         alert("Household updated successfully!");
 
         loadHouseholds();
+        loadDashboard();
 
     } catch (error) {
 
         console.error(error);
-        alert("Error updating household");
+        alert("Error updating household: " + error.message);
     }
 }
 
@@ -383,10 +403,11 @@ async function updateHousehold(id) {
 // DELETE HOUSEHOLD
 async function deleteHousehold(id) {
 
-    const confirmDelete =
-        confirm("Are you sure you want to delete this household?");
-
-    if (!confirmDelete) return;
+    if (!confirm(
+        "Are you sure you want to delete this household?"
+    )) {
+        return;
+    }
 
     try {
 
@@ -398,17 +419,18 @@ async function deleteHousehold(id) {
         );
 
         if (!response.ok) {
-            throw new Error("Failed to delete household");
+            throw new Error(await response.text());
         }
 
         alert("Household deleted successfully!");
 
         loadHouseholds();
+        loadDashboard();
 
     } catch (error) {
 
         console.error(error);
-        alert("Error deleting household");
+        alert("Error deleting household: " + error.message);
     }
 }
 
@@ -425,6 +447,11 @@ async function addGeneration() {
 
     const unitsGenerated =
         document.getElementById("unitsGenerated").value;
+
+    if (!date || !unitsGenerated) {
+        alert("Please enter date and units generated.");
+        return;
+    }
 
     const generation = {
         date: date,
@@ -445,7 +472,7 @@ async function addGeneration() {
         );
 
         if (!response.ok) {
-            throw new Error("Failed to add generation log");
+            throw new Error(await response.text());
         }
 
         alert("Generation log added successfully!");
@@ -454,11 +481,12 @@ async function addGeneration() {
         document.getElementById("unitsGenerated").value = "";
 
         loadGenerations();
+        loadDashboard();
 
     } catch (error) {
 
         console.error(error);
-        alert("Error adding generation log");
+        alert("Error adding generation log: " + error.message);
     }
 }
 
@@ -475,7 +503,8 @@ async function loadGenerations() {
             throw new Error("Failed to load generation logs");
         }
 
-        const generations = await response.json();
+        const generations =
+            await response.json();
 
         const container =
             document.getElementById("generationList");
@@ -484,7 +513,8 @@ async function loadGenerations() {
 
         generations.forEach(generation => {
 
-            const card = document.createElement("div");
+            const card =
+                document.createElement("div");
 
             card.className = "result-card";
 
@@ -560,17 +590,18 @@ async function updateGeneration(id) {
         );
 
         if (!response.ok) {
-            throw new Error("Failed to update generation");
+            throw new Error(await response.text());
         }
 
         alert("Generation log updated successfully!");
 
         loadGenerations();
+        loadDashboard();
 
     } catch (error) {
 
         console.error(error);
-        alert("Error updating generation");
+        alert("Error updating generation: " + error.message);
     }
 }
 
@@ -578,10 +609,11 @@ async function updateGeneration(id) {
 // DELETE GENERATION
 async function deleteGeneration(id) {
 
-    const confirmDelete =
-        confirm("Are you sure you want to delete this generation log?");
-
-    if (!confirmDelete) return;
+    if (!confirm(
+        "Are you sure you want to delete this generation log?"
+    )) {
+        return;
+    }
 
     try {
 
@@ -593,17 +625,18 @@ async function deleteGeneration(id) {
         );
 
         if (!response.ok) {
-            throw new Error("Failed to delete generation log");
+            throw new Error(await response.text());
         }
 
         alert("Generation log deleted successfully!");
 
         loadGenerations();
+        loadDashboard();
 
     } catch (error) {
 
         console.error(error);
-        alert("Error deleting generation log");
+        alert("Error deleting generation log: " + error.message);
     }
 }
 
@@ -623,6 +656,11 @@ async function addConsumption() {
 
     const unitsConsumed =
         document.getElementById("unitsConsumed").value;
+
+    if (!householdId || !date || !unitsConsumed) {
+        alert("Please fill all consumption fields.");
+        return;
+    }
 
     const consumption = {
         householdId: Number(householdId),
@@ -644,7 +682,7 @@ async function addConsumption() {
         );
 
         if (!response.ok) {
-            throw new Error("Failed to add consumption log");
+            throw new Error(await response.text());
         }
 
         alert("Consumption log added successfully!");
@@ -654,11 +692,12 @@ async function addConsumption() {
         document.getElementById("unitsConsumed").value = "";
 
         loadConsumptions();
+        loadDashboard();
 
     } catch (error) {
 
         console.error(error);
-        alert("Error adding consumption log");
+        alert("Error adding consumption log: " + error.message);
     }
 }
 
@@ -675,7 +714,8 @@ async function loadConsumptions() {
             throw new Error("Failed to load consumption logs");
         }
 
-        const consumptions = await response.json();
+        const consumptions =
+            await response.json();
 
         const container =
             document.getElementById("consumptionList");
@@ -684,7 +724,8 @@ async function loadConsumptions() {
 
         consumptions.forEach(consumption => {
 
-            const card = document.createElement("div");
+            const card =
+                document.createElement("div");
 
             card.className = "result-card";
 
@@ -771,17 +812,18 @@ async function updateConsumption(id) {
         );
 
         if (!response.ok) {
-            throw new Error("Failed to update consumption");
+            throw new Error(await response.text());
         }
 
         alert("Consumption log updated successfully!");
 
         loadConsumptions();
+        loadDashboard();
 
     } catch (error) {
 
         console.error(error);
-        alert("Error updating consumption");
+        alert("Error updating consumption: " + error.message);
     }
 }
 
@@ -789,10 +831,11 @@ async function updateConsumption(id) {
 // DELETE CONSUMPTION
 async function deleteConsumption(id) {
 
-    const confirmDelete =
-        confirm("Are you sure you want to delete this consumption log?");
-
-    if (!confirmDelete) return;
+    if (!confirm(
+        "Are you sure you want to delete this consumption log?"
+    )) {
+        return;
+    }
 
     try {
 
@@ -804,17 +847,18 @@ async function deleteConsumption(id) {
         );
 
         if (!response.ok) {
-            throw new Error("Failed to delete consumption log");
+            throw new Error(await response.text());
         }
 
         alert("Consumption log deleted successfully!");
 
         loadConsumptions();
+        loadDashboard();
 
     } catch (error) {
 
         console.error(error);
-        alert("Error deleting consumption log");
+        alert("Error deleting consumption: " + error.message);
     }
 }
 
@@ -834,6 +878,16 @@ async function getMonthlySummary() {
     const month =
         document.getElementById("summaryMonth").value;
 
+    if (!householdId || !year || !month) {
+        alert("Please enter household ID, year and month.");
+        return;
+    }
+
+    if (month < 1 || month > 12) {
+        alert("Month must be between 1 and 12.");
+        return;
+    }
+
     try {
 
         const response = await fetch(
@@ -841,15 +895,17 @@ async function getMonthlySummary() {
         );
 
         if (!response.ok) {
-            throw new Error("Failed to get monthly summary");
+            throw new Error(await response.text());
         }
 
-        const summary = await response.json();
+        const summary =
+            await response.json();
 
         const container =
             document.getElementById("summaryResult");
 
         container.innerHTML = `
+
             <div class="result-card">
 
                 <h3>Monthly Summary</h3>
@@ -885,6 +941,7 @@ async function getMonthlySummary() {
                 </p>
 
             </div>
+
         `;
 
     } catch (error) {
@@ -892,20 +949,221 @@ async function getMonthlySummary() {
         console.error(error);
 
         document.getElementById("summaryResult").innerHTML =
-            "<p>Unable to load monthly summary.</p>";
+            `<p>Error: ${error.message}</p>`;
     }
 }
 
 
 // ======================================================
-// LOAD DATA WHEN PAGE OPENS
+// DAILY NET EXPORT
 // ======================================================
 
-document.addEventListener("DOMContentLoaded", () => {
+async function getNetExport() {
 
-    loadInstallations();
-    loadHouseholds();
-    loadGenerations();
-    loadConsumptions();
+    const householdId =
+        document.getElementById("netExportHouseholdId").value;
 
-});
+    const date =
+        document.getElementById("netExportDate").value;
+
+    if (!householdId || !date) {
+
+        alert("Please enter household ID and date.");
+
+        return;
+    }
+
+    try {
+
+        const response = await fetch(
+            `${BASE_URL}/solar-share/net-export/${householdId}?date=${date}`
+        );
+
+        if (!response.ok) {
+            throw new Error(await response.text());
+        }
+
+        const result =
+            await response.json();
+
+        const container =
+            document.getElementById("netExportResult");
+
+        container.innerHTML = `
+
+            <div class="result-card">
+
+                <h3>Daily Net Export</h3>
+
+                <p>
+                    <strong>Household ID:</strong>
+                    ${result.householdId}
+                </p>
+
+                <p>
+                    <strong>Date:</strong>
+                    ${result.date}
+                </p>
+
+                <p>
+                    <strong>Net Export:</strong>
+                    ${result.netExport} units
+                </p>
+
+            </div>
+
+        `;
+
+    } catch (error) {
+
+        console.error(error);
+
+        document.getElementById("netExportResult").innerHTML =
+            `<p>Error: ${error.message}</p>`;
+    }
+}
+
+
+// ======================================================
+// DASHBOARD
+// ======================================================
+
+async function loadDashboard() {
+
+    try {
+
+        // ----------------------------------------------
+        // GET GENERATION LOGS
+        // ----------------------------------------------
+
+        const generationResponse =
+            await fetch(`${BASE_URL}/generation-logs`);
+
+        if (!generationResponse.ok) {
+            throw new Error("Failed to load generation data");
+        }
+
+        const generations =
+            await generationResponse.json();
+
+
+        // ----------------------------------------------
+        // GET CONSUMPTION LOGS
+        // ----------------------------------------------
+
+        const consumptionResponse =
+            await fetch(`${BASE_URL}/consumption-logs`);
+
+        if (!consumptionResponse.ok) {
+            throw new Error("Failed to load consumption data");
+        }
+
+        const consumptions =
+            await consumptionResponse.json();
+
+
+        // ----------------------------------------------
+        // GET HOUSEHOLDS
+        // ----------------------------------------------
+
+        const householdResponse =
+            await fetch(`${BASE_URL}/households`);
+
+        if (!householdResponse.ok) {
+            throw new Error("Failed to load household data");
+        }
+
+        const households =
+            await householdResponse.json();
+
+
+        // ----------------------------------------------
+        // CALCULATE TOTAL GENERATION
+        // ----------------------------------------------
+
+        const totalGeneration =
+            generations.reduce(
+                (total, generation) =>
+                    total +
+                    Number(generation.unitsGenerated || 0),
+                0
+            );
+
+
+        // ----------------------------------------------
+        // CALCULATE TOTAL CONSUMPTION
+        // ----------------------------------------------
+
+        const totalConsumption =
+            consumptions.reduce(
+                (total, consumption) =>
+                    total +
+                    Number(consumption.unitsConsumed || 0),
+                0
+            );
+
+
+        // ----------------------------------------------
+        // CALCULATE TOTAL NET EXPORT
+        // ----------------------------------------------
+
+        const totalExport =
+            Math.max(
+                totalGeneration - totalConsumption,
+                0
+            );
+
+
+        // ----------------------------------------------
+        // UPDATE DASHBOARD
+        // ----------------------------------------------
+
+        document.getElementById("totalGeneration").textContent =
+            `${totalGeneration} kWh`;
+
+        document.getElementById("totalConsumption").textContent =
+            `${totalConsumption} kWh`;
+
+        document.getElementById("totalExport").textContent =
+            `${totalExport} kWh`;
+
+        document.getElementById("totalHouseholds").textContent =
+            households.length;
+
+
+    } catch (error) {
+
+        console.error(
+            "Dashboard error:",
+            error
+        );
+
+    }
+}
+
+
+// ======================================================
+// PAGE LOAD
+// ======================================================
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        // Dashboard
+        loadDashboard();
+
+        // Installation
+        loadInstallations();
+
+        // Household
+        loadHouseholds();
+
+        // Generation
+        loadGenerations();
+
+        // Consumption
+        loadConsumptions();
+
+    }
+);

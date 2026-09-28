@@ -200,7 +200,7 @@
     <!-- Monthly Summary -->
     <section id="summary" class="section">
 
-        <h2>Monthly Net Usage Summary</h2>
+        <h2>SolarShare Analysis</h2>
 
         <div class="form-container">
 
@@ -217,15 +217,38 @@
             <input
                     type="number"
                     id="summaryMonth"
-                    placeholder="Month">
+                    placeholder="Month (1-12)">
 
             <button onclick="getMonthlySummary()">
-                View Summary
+                Monthly Summary
             </button>
 
         </div>
 
+
         <div id="summaryResult"></div>
+
+
+        <h2>Daily Net Export</h2>
+
+        <div class="form-container">
+
+            <input
+                    type="number"
+                    id="netExportHouseholdId"
+                    placeholder="Household ID">
+
+            <input
+                    type="date"
+                    id="netExportDate">
+
+            <button onclick="getNetExport()">
+                Calculate Net Export
+            </button>
+
+        </div>
+
+        <div id="netExportResult"></div>
 
     </section>
 
