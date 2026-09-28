@@ -1,0 +1,243 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f6;
+    color: #222;
+}
+
+
+/* =========================
+   NAVIGATION BAR
+   ========================= */
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 18px 40px;
+
+    background-color: #173f35;
+    color: white;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    gap: 22px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================
+   SECTIONS
+   ========================= */
+
+.section {
+    max-width: 1200px;
+    margin: auto;
+    padding: 70px 30px;
+}
+
+.section h1 {
+    font-size: 38px;
+    margin-bottom: 10px;
+}
+
+.section h2 {
+    font-size: 28px;
+    margin-bottom: 25px;
+}
+
+.subtitle {
+    color: #666;
+    font-size: 18px;
+    margin-bottom: 35px;
+}
+
+
+/* =========================
+   DASHBOARD CARDS
+   ========================= */
+
+.dashboard-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.card {
+    background-color: white;
+
+    padding: 25px;
+
+    border-radius: 12px;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.card h3 {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.card p {
+    font-size: 28px;
+    font-weight: bold;
+    color: #173f35;
+}
+
+
+/* =========================
+   FORMS
+   ========================= */
+
+.form-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    background-color: white;
+
+    padding: 25px;
+
+    border-radius: 12px;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+    margin-bottom: 25px;
+}
+
+.form-container input {
+    padding: 12px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 6px;
+
+    font-size: 14px;
+
+    outline: none;
+}
+
+.form-container input:focus {
+    border-color: #173f35;
+}
+
+.form-container button {
+    padding: 12px 20px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    background-color: #173f35;
+
+    color: white;
+
+    font-size: 14px;
+
+    cursor: pointer;
+}
+
+.form-container button:hover {
+    background-color: #245f50;
+}
+
+
+/* =========================
+   RESULT / LIST AREA
+   ========================= */
+
+#installationList,
+#householdList,
+#generationList,
+#consumptionList,
+#summaryResult {
+    display: grid;
+    gap: 12px;
+}
+
+.result-card {
+    background-color: white;
+
+    padding: 18px;
+
+    border-radius: 8px;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+
+/* =========================
+   RESPONSIVE DESIGN
+   ========================= */
+
+@media (max-width: 900px) {
+
+    .navbar {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .dashboard-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .section {
+        padding: 50px 20px;
+    }
+
+    .section h1 {
+        font-size: 30px;
+    }
+
+    .dashboard-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .form-container {
+        flex-direction: column;
+    }
+
+    .form-container input,
+    .form-container button {
+        width: 100%;
+    }
+}

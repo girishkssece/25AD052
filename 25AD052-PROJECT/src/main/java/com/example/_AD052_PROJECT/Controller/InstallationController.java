@@ -13,11 +13,13 @@ public class InstallationController {
 
     private final InstallationService installationService;
 
-    public InstallationController(InstallationService installationService) {
+    public InstallationController(
+            InstallationService installationService) {
+
         this.installationService = installationService;
     }
 
-    // CREATE
+    // Create installation
     @PostMapping
     public ResponseEntity<Installation> createInstallation(
             @RequestBody Installation installation) {
@@ -27,7 +29,7 @@ public class InstallationController {
         );
     }
 
-    // GET ALL
+    // Get all installations
     @GetMapping
     public ResponseEntity<List<Installation>> getAllInstallations() {
 
@@ -36,34 +38,39 @@ public class InstallationController {
         );
     }
 
-    // GET BY ID
+    // Get installation by ID
     @GetMapping("/{id}")
     public ResponseEntity<Installation> getInstallationById(
             @PathVariable Long id) {
 
-        return installationService.getInstallationById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        return ResponseEntity.ok(
+                installationService.getInstallationById(id)
+        );
     }
 
-    // UPDATE
+    // Update installation
     @PutMapping("/{id}")
     public ResponseEntity<Installation> updateInstallation(
             @PathVariable Long id,
             @RequestBody Installation installation) {
 
         return ResponseEntity.ok(
-                installationService.updateInstallation(id, installation)
+                installationService.updateInstallation(
+                        id,
+                        installation
+                )
         );
     }
 
-    // DELETE
+    // Delete installation
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteInstallation(
+    public ResponseEntity<String> deleteInstallation(
             @PathVariable Long id) {
 
         installationService.deleteInstallation(id);
 
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(
+                "Installation deleted successfully"
+        );
     }
 }
